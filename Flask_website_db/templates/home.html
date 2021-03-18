@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Module 4: Basic Flask Website</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if session['logged'] %}
+            <h1>Welcome {{name}}</h1>
+                {% if session['sec_lvl'] == 1 %}
+                    <h2><a href="/new">Add New Agent</a></h2>
+                    <h2><a href="/list">List All Agents</a></h2>
+                {% endif %}
+                {% if session['sec_lvl'] == 2 %}
+                    <h2><a href="/list">List All Agents</a></h2>
+                {% endif %}
+                <h2><a href="/send">Send a Message to the Boss (HMAC)</a></h2>
+                <h2><a href="/logout">Logout</a></h2>
+        {% endif %}
+    </body>
+</html>

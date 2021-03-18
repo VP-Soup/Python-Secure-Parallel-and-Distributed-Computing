@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Agent Result</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if session['logged'] %}
+            Query Result:
+            {% for i in msg %}
+                <p>{{i}}</p>
+            {% endfor %}
+            <h2><a href="/">Back to Homepage</a> </h2>
+        {% endif %}
+
+        {% if not session['logged'] %}
+        Query Result: Page Not Found
+        <h2><a href="/">Back to Homepage</a> </h2>
+        {% endif %}
+    </body>
+</html>

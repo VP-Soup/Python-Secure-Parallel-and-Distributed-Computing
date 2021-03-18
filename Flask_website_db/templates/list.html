@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>SecretAgents List</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    {% if session['logged'] %}
+        {% if session['sec_lvl'] <= 2%}
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <td>AgentName</td>
+                            <td>AgentAlias</td>
+                            <td>AgentSecurityLevel</td>
+                            <td>LoginPassword</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in rows.itertuples() %}
+                        <tr>
+                            <td>{{row[1]}}</td>
+                            <td>{{row[2]}}</td>
+                            <td>{{row[3]}}</td>
+                            <td>{{row[4]}}</td>
+                        </tr>
+                    {% endfor %}}
+                    </tbody>
+                </table>
+                <a href="/">Back to Homepage</a>
+        {% endif %}
+        {% if session['sec_lvl'] > 2 %}
+            Query Result: Page not found
+            <h2><a href="/">Back to Homepage</a> </h2>
+        {% endif %}
+    {% endif %}
+    </body>
+</html>

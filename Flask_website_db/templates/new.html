@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>New Agent Form</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if session['logged'] %}
+            {% if session['sec_lvl'] == 1 %}
+                <form action="{{ url_for('add') }}" method="POST">
+                    Agent Name<br>
+                    <input type="text" name="name"><br>
+                    Agent Alias<br>
+                    <input type="text" name="alias"><br>
+                    Agent Security Level<br>
+                    <input type="text" name="security"><br>
+                    Agent Password<br>
+                    <input type="text" name="password"><br>
+                    <input type="submit" name="submit"><br>
+                </form>
+            {% endif %}
+            {% if session['sec_lvl'] != 1 %}
+                Query Result: Page not found
+                <h2><a href="/">Back to Homepage</a> </h2>
+            {% endif %}
+        {% endif %}
+    </body>
+</html>
